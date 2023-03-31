@@ -1,8 +1,7 @@
-Application/User/main.o: \
- /Users/kevinshiuan/Documents/MyFile/Embed/HW2/STM32CubeL4/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/main.c \
- ../../../Inc/main.h ../../../../Common/Inc/wifi.h \
- ../../../../Common/Inc/es_wifi.h ../../../Inc/es_wifi_conf.h \
- ../../../../Common/Inc/es_wifi_io.h \
+Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.o: \
+ ../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.c \
+ ../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.h \
+ ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../../../Inc/stm32l4xx_hal_conf.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -35,20 +34,11 @@ Application/User/main.o: \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_accelero.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/lsm6dsl.h \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/accelero.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/gyro.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_qspi.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/mx25r6435f/mx25r6435f.h
-../../../Inc/main.h:
-../../../../Common/Inc/wifi.h:
-../../../../Common/Inc/es_wifi.h:
-../../../Inc/es_wifi_conf.h:
-../../../../Common/Inc/es_wifi_io.h:
+ ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/gyro.h
+../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.h:
+../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h:
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../../../Inc/stm32l4xx_hal_conf.h:
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:
@@ -81,12 +71,6 @@ Application/User/main.o: \
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h:
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h:
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h:
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_accelero.h:
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/lsm6dsl.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/accelero.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/gyro.h:
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.h:
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_qspi.h:
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/mx25r6435f/mx25r6435f.h:

@@ -24,6 +24,7 @@
 #include "wifi.h"
 #include "stm32l475e_iot01.h"
 #include "stm32l475e_iot01_accelero.h"
+#include "stm32l475e_iot01_gyro.h"
 #include "stm32l475e_iot01_qspi.h"
 #include "stdio.h"
 

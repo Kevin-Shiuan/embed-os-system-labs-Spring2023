@@ -41,6 +41,7 @@ Application/User/stm32l4xx_it.o: \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/lsm6dsl.h \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/accelero.h \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/gyro.h \
+ ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.h \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_qspi.h \
  ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/mx25r6435f/mx25r6435f.h \
  ../../../Inc/stm32l4xx_it.h ../../../Inc/main.h
@@ -87,6 +88,7 @@ Application/User/stm32l4xx_it.o: \
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/lsm6dsl.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/accelero.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/lsm6dsl/../Common/gyro.h:
+../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_qspi.h:
 ../../../../../../../../Drivers/BSP/B-L475E-IOT01/../Components/mx25r6435f/mx25r6435f.h:
 ../../../Inc/stm32l4xx_it.h:

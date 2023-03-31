@@ -17,22 +17,24 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stm32l475e_iot01_accelero.h"
+#include "stm32l475e_iot01_gyro.h"
 
 /* Private defines -----------------------------------------------------------*/
 
 #define TERMINAL_USE
 
 /* Update SSID and PASSWORD with own Access point settings */
-#define SSID     "makerspace-2.4G"
-#define PASSWORD "ntueemakerspace"
+#define SSID     "<SSID>"
+#define PASSWORD "<password>"
 
-uint8_t RemoteIP[] = {192,168,10,173};
-#define RemotePORT	8002
+uint8_t RemoteIP[] = {192,168,1,1};
+#define RemotePORT	65431
 
 #define WIFI_WRITE_TIMEOUT 10000
 #define WIFI_READ_TIMEOUT  10000
 
-#define CONNECTION_TRIAL_MAX          10
+#define CONNECTION_TRIAL_MAX 10
 
 #if defined (TERMINAL_USE)
 #define TERMOUT(...)  printf(__VA_ARGS__)
@@ -59,10 +61,8 @@ static uint8_t RxData [500];
 #endif /* TERMINAL_USE */
 
 static void SystemClock_Config(void);
-
-
-
 extern  SPI_HandleTypeDef hspi;
+
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -75,11 +75,18 @@ int main(void)
 {
   uint8_t  MAC_Addr[6] = {0};
   uint8_t  IP_Addr[4] = {0};
-  uint8_t TxData[] = "STM32 : Hello, Kevin Shiuan !\n";
   int32_t Socket = -1;
   uint16_t Datalen;
   int32_t ret;
   int16_t Trials = CONNECTION_TRIAL_MAX;
+
+  char data_str[512]; // string buffer to hold converted data
+  int len; // length of data string
+  int16_t acc_xyz[3]; // array to hold acceleration data
+  BSP_ACCELERO_Init(); // initialize accelerometer module
+  BSP_GYRO_Init();
+  float gyro_xyz[3]; // array to hold gyroscope data
+  BSP_GYRO_Init(); // initialize gyroscope module
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -113,8 +120,6 @@ int main(void)
   TERMOUT("   with port(8002).\n");
   TERMOUT("3- Get the Network Name or IP Address of your Android from the step 2.\n\n");
 
-
-
   /*Initialize  WIFI module */
   if(WIFI_Init() ==  WIFI_STATUS_OK)
   {
@@ -135,8 +140,7 @@ int main(void)
       BSP_LED_On(LED2);
     }
 
-    if( WIFI_Connect(SSID, PASSWORD, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK)
-    {
+    if( WIFI_Connect(SSID, PASSWORD, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK){
       TERMOUT("> es-wifi module connected \n");
       if(WIFI_GetIP_Address(IP_Addr, sizeof(IP_Addr)) == WIFI_STATUS_OK)
       {
@@ -197,7 +201,13 @@ int main(void)
         {
           RxData[Datalen]=0;
           TERMOUT("Received: %s\n",RxData);
-          ret = WIFI_SendData(Socket, TxData, sizeof(TxData), &Datalen, WIFI_WRITE_TIMEOUT);
+    	  BSP_ACCELERO_AccGetXYZ(acc_xyz); // read acceleration data
+    	  BSP_GYRO_GetXYZ(gyro_xyz); // read gyroscope data
+//    	  TERMOUT("gyro_xyz[0] = %f\n", gyro_xyz[0]); // print acceleration data to console
+//    	  TERMOUT("gyro_xyz[1] = %f\n", gyro_xyz[1]); // print acceleration data to console
+//    	  TERMOUT("gyro_xyz[2] = %f\n", gyro_xyz[2]); // print acceleration data to console
+          len = sprintf(data_str, "{\"Gyro\":{\"x\":%f,\"y\":%f,\"z\":%f},\"Acce\":{\"x\":%d,\"y\":%d,\"z\":%d}}", gyro_xyz[0], gyro_xyz[1], gyro_xyz[2], acc_xyz[0], acc_xyz[1], acc_xyz[2]); // convert data to string
+          ret = WIFI_SendData(Socket, (uint8_t *)data_str, len, &Datalen, WIFI_WRITE_TIMEOUT); // send string over Wi-Fi
           if (ret != WIFI_STATUS_OK)
           {
             TERMOUT("> ERROR : Failed to Send Data, connection closed\n");

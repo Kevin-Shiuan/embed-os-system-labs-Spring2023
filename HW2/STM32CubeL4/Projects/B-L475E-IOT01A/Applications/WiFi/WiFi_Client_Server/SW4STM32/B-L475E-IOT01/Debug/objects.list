@@ -5,6 +5,7 @@
 "./Application/WIFI/wifi.o"
 "./Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.o"
 "./Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_accelero.o"
+"./Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.o"
 "./Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_qspi.o"
 "./Drivers/BSP/Components/lsm6dsl.o"
 "./Drivers/CMSIS/system_stm32l4xx.o"
