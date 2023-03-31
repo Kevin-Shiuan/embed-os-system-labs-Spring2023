@@ -2,11 +2,8 @@
 import socket
 import numpy as np
 import json
-import time
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-# from matplotlib import style
-
 
 HOST = '<IP>'  # IP address
 PORT = 65431  # Port to listen on (use ports > 1023)
@@ -70,6 +67,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             ax_acce.legend()
 
         # create a FuncAnimation object and display the plot
-        # ani = animation.FuncAnimation(fig, animate, frames=range(0, 100), interval=100, cache_frame_data=False)
         ani = animation.FuncAnimation(fig, animate, frames=range(0, DATA_SIZE), interval=200)
         plt.show()
