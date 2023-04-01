@@ -104,7 +104,7 @@ replace source/main.cpp and mbed_app.json and edit parameters accordingly if nee
 
 3. ### build and run project in mbed studio
 
-4. ### compile and run server.c on laptop to log data
+4. ### compile server.c and run on laptop to log data
 
 data will be tab delimited and written to the file 'log.dat' in the current directory
 
