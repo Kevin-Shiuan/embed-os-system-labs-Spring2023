@@ -93,3 +93,21 @@ https://youtu.be/q4nFjyXjW88
 ---
 
 ## for mbed studio
+
+1. ### create new project
+
+start with example program mbed-os-example-sockets and import bsp library into project from http://developer.mbed.org/teams/ST/code/BSP_B-L475E-IOT01/
+
+2. ### modify project files
+
+replace source/main.cpp and mbed_app.json and edit parameters accordingly if needed (ssid, password, ip address, port number etc.)
+
+3. ### build and run project in mbed studio
+
+4. ### compile and run server.c on laptop to log data
+
+data will be tab delimited and written to the file 'log.dat' in the current directory
+
+5. ### run myplot.m with octave (an open source matlab alternative)
+
+a pop-up window should appear showing a figure containing plots of 'log.dat' updated in real-time
