@@ -1,4 +1,4 @@
-# this program was tested on a laptop running wsl2 debian in windows
+# this program was tested on a laptop running wsl2 debian on windows
 
 1. ## change name to 'Pixel 7' for gatt server program running on phone or modify ble.c accordingly
 
