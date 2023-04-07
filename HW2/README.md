@@ -2,6 +2,10 @@
 
 ## for STM32CubeIDE
 
+> ### in case that you want to view source code, the main.c is located at:
+> ./HW2/STM32CubeL4/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/main.c
+
+
 1.  ### open the project in STM32CubeIDE
 
     file -> open project from file systems -> choose the project folder
@@ -12,11 +16,11 @@
 
     #### i. at ./HW2/STM32CubeL4/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Inc/main.h, add the following lines
 
-```cpp
-#include "stm32l475e_iot01_accelero.h"
-#include "stm32l475e_iot01_gyro.h"
-#include "stm32l475e_iot01_qspi.h"
-```
+    ```cpp
+    #include "stm32l475e_iot01_accelero.h"
+    #include "stm32l475e_iot01_gyro.h"
+    #include "stm32l475e_iot01_qspi.h"
+    ```
 
 **Note:** you should include the libraries of the sensors. We included the path of library in our project, you may need to add the path yourself, you can refer to this [document](https://wiki.st.com/stm32mcu/wiki/STM32StepByStep:Step4_Sensors_usage)
 
@@ -26,23 +30,32 @@
 #define HAL_QSPI_MODULE_ENABLED
 ```
 
-3.  ### edit main.c
+3.  ### edit main.c & main.h
+    ./B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Inc/main.h should have the following libraries
+    ```cpp
+    /* Includes ------------------------------------------------------------------*/
+    #include "wifi.h"
+    #include "stm32l475e_iot01.h"
+    #include "stm32l475e_iot01_accelero.h"
+    #include "stm32l475e_iot01_gyro.h"
+    #include "stm32l475e_iot01_qspi.h"
+    #include "stdio.h"
+    ```
+    In ./B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/main.c, configure the wifi network name & password, IP address & port of the TCP server
 
-    Open ./Application/User/main.c, configure the wifi network name & password, IP address & port of the TCP server
+    ```cpp
+    #include "stm32l475e_iot01_accelero.h"
+    #include "stm32l475e_iot01_gyro.h"
+    #include "stm32l475e_iot01_qspi.h"
 
-```cpp
-#include "stm32l475e_iot01_accelero.h"
-#include "stm32l475e_iot01_gyro.h"
-#include "stm32l475e_iot01_qspi.h"
+    // WiFi network name and password
+    #define SSID_NAME "<your wifi name>"
+    #define SSID_PSWD "<your wifi password>"
 
-// WiFi network name and password
-#define SSID_NAME "<your wifi name>"
-#define SSID_PSWD "<your wifi password>"
-
-// IP address and port of the TCP server
-uint8_t RemoteIP[] = {192,168, xxx, yyy};
-#define RemotePORT <port>
-```
+    // IP address and port of the TCP server
+    uint8_t RemoteIP[] = {192,168, xxx, yyy};
+    #define RemotePORT <port>
+    ```
 
 4. ### build and run
 
@@ -70,7 +83,7 @@ uint8_t RemoteIP[] = {192,168, xxx, yyy};
 
 7. ### communication between the board and the TCP server
 
-   The board will send the data to the TCP server every time server is requesting (which is 200ms in our code ). The raw data is send in json format, which is easy to parse in python. The data is in the following format.
+   The board will send the data to the TCP server every time server is requesting for data, which is every 200ms in our code. The raw data is send in json format, which is easy to parse in python. The data is in the following format.
 
    ```json
    {
