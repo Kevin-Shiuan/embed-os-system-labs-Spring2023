@@ -1,4 +1,4 @@
-# HW2 Mbed BLE programming - Peripheral in mbed-os (stm32) and Central in Python (RPi)
+# HW4 Mbed BLE programming - Peripheral in mbed-os (stm32) and Central in Python (RPi)
 
 1.  ### open the project in mbed studio
 
