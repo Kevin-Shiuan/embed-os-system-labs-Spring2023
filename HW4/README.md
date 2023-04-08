@@ -4,95 +4,64 @@
 
     file -> open workspace -> choose the root folder of this project, which is HW4
 
-    ./HW2/STM32CubeL4/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/SW4STM32/B-L475E-IOT01
+1.  ### modify project files
 
-2.  ### modify project files
+    fix the library if needed, esle you can skip this step
 
-    #### i. at ./HW2/STM32CubeL4/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Inc/main.h, add the following lines
+1.  ### run the embed program on stm32
+    build, upload and run the program on the board
+    watch the serial monitor to see the DEVICE MAC ADDRESS of the board, we will need it in the next step
 
-    ```cpp
-    #include "stm32l475e_iot01_accelero.h"
-    #include "stm32l475e_iot01_gyro.h"
-    #include "stm32l475e_iot01_qspi.h"
-    ```
+1. ### modify code of python program
 
-**Note:** you should include the libraries of the sensors. We included the path of library in our project, you may need to add the path yourself, you can refer to this [document](https://wiki.st.com/stm32mcu/wiki/STM32StepByStep:Step4_Sensors_usage)
-
-#### ii. at ./HW2/STM32CubeL4/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/INC/stm32l4xx_hal_conf.h, uncomment line 62
-
-```cpp
-#define HAL_QSPI_MODULE_ENABLED
-```
-
-3.  ### edit main.c & main.h
-    ./B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Inc/main.h should have the following libraries
-    ```cpp
-    /* Includes ------------------------------------------------------------------*/
-    #include "wifi.h"
-    #include "stm32l475e_iot01.h"
-    #include "stm32l475e_iot01_accelero.h"
-    #include "stm32l475e_iot01_gyro.h"
-    #include "stm32l475e_iot01_qspi.h"
-    #include "stdio.h"
-    ```
-    In ./B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/main.c, configure the wifi network name & password, IP address & port of the TCP server
-
-    ```cpp
-    #include "stm32l475e_iot01_accelero.h"
-    #include "stm32l475e_iot01_gyro.h"
-    #include "stm32l475e_iot01_qspi.h"
-
-    // WiFi network name and password
-    #define SSID_NAME "<your wifi name>"
-    #define SSID_PSWD "<your wifi password>"
-
-    // IP address and port of the TCP server
-    uint8_t RemoteIP[] = {192,168, xxx, yyy};
-    #define RemotePORT <port>
-    ```
-
-4. ### build and run
-
-   Build the project and run it on the board
-
-5. ### set up the TCP server
-
-    Our TCP server is coded in python, you can find the code in TCPserver.py. Before running the server, open the file and modify the following lines
+    open the file `magneto.py` and modify the following lines
 
     ```python
-    HOST = '<IP>'  # IP address
-    PORT = 65431  # Port to listen on (use ports > 1023)
-    DATA_SIZE = 50 # number of data to be displayed in the graph simultaneously, you can change it to any number you want
+    # change the address to the address of your board
+    MAC_ADDRESS = "xx:xx:xx:xx:xx:xx" # change this to the DEVICE MAC ADDRESS of your board that you got from the serial monitor in the previous step
     ```
-    
-    To run the server in desktop, you can use the following command in the terminal
+
+1. ### start the python program in RPi
+    > you can transfer the file to RPi with any method you like, such as scp, sftp, etc.
 
     ```bash
-    python3 TCPserver.py 
+    sudo python3 magneto.py
+    ```
+    **Note:** you need to use `sudo` to run the program
+
+    **Note:** you need to set up the bluetooth functionality in RPi first
+
+1. ### select services and characteristics
+    enter the uuid of services that shown  on the terminal
+    > you should select the uuid of service *uuid=Heart Rate handleStart=11 handleEnd=65535*
+    
+    then enter the uuid of characteristics that shown on the terminal
+    > you should select the uuid of characteristics *Heart Rate Measurement*
+    
+    ```bash
+    Connecting to #fe:20:bc:2d:a2:84...
+    Available Services:
+    Service 00001800-0000-1000-8000-00805f9b34fb Service <uuid=Generic Access handleStart=1 handleEnd=7>
+    Service 00001801-0000-1000-8000-00805f9b34fb Service <uuid=Generic Attribute handleStart=8 handleEnd=10>
+    Service 0000180d-0000-1000-8000-00805f9b34fb Service <uuid=Heart Rate handleStart=11 handleEnd=65535>
+    service uuid: 0000180d-0000-1000-8000-00805f9b34fb #enter uuid here
+    0000180d-0000-1000-8000-00805f9b34fb
+
+    Available Characteristics:
+    00002a37-0000-1000-8000-00805f9b34fb Characteristic <Heart Rate Measurement>
+    00002a38-0000-1000-8000-00805f9b34fb Characteristic <Body Sensor Location>
+    char uuid: 00002a37-0000-1000-8000-00805f9b34fb #enter uuid here
     ```
 
-6. ### connection between the board and the TCP server
-
-   The board will try to connect to the TCP server. Status of the board will be shown on the serial monitor, which is **Command Shell Console** of STM32CubeIDE. the baud rate is _115200_.
-
-7. ### communication between the board and the TCP server
-
-   The board will send the data to the TCP server every time server is requesting for data, which is every 200ms in our code. The raw data is send in json format, which is easy to parse in python. The data is in the following format.
-
-   ```json
-   {
-       "acce": {
-           "x": 0,
-           "y": 0,
-           "z": 0,
-       },
-       "gyro": {
-           "x": 0.0,
-           "y": 0.0,
-           "z": 0.0,
-       }
-   }
-   ```
+1. ### connected
+    you should see the following message on the terminal
+    ```bash
+    notified data: xxx
+    notified data: xxx
+    notified data: xxx
+    ...
+    ```
+    the data is the measurement of magnetometer in x, y, z axis, the data is updated every 1 second, and is in the order of x, y, z.
 
 ### demo video
 https://youtu.be/hdbEdIsr6-M

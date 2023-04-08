@@ -2,8 +2,8 @@ from bluepy.btle import Peripheral, UUID
 from bluepy.btle import Scanner, DefaultDelegate
 import struct
 
+# change the address to the address of your board
 MAC_ADDRESS = "fe:20:bc:2d:a2:84"
-
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
