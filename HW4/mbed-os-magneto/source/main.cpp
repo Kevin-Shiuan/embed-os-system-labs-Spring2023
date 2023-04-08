@@ -57,6 +57,9 @@ private:
 
         print_mac_address();
 
+        /* init sensor */
+        BSP_MAGNETO_Init();
+
         /* this allows us to receive events like onConnectionComplete() */
         _ble.gap().setEventHandler(this);
 
@@ -67,9 +70,6 @@ private:
                 update_sensor_value();
             }
         );
-
-        /* init sensor */
-        BSP_MAGNETO_Init();
 
         start_advertising();
     }
