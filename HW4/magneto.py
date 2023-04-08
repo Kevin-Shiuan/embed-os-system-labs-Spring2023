@@ -2,6 +2,8 @@ from bluepy.btle import Peripheral, UUID
 from bluepy.btle import Scanner, DefaultDelegate
 import struct
 
+MAC_ADDRESS = "fe:20:bc:2d:a2:84"
+
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -17,37 +19,34 @@ class ScanDelegate(DefaultDelegate):
 class MyDelegate(DefaultDelegate):
     def __init__(self):
         DefaultDelegate.__init__(self)
-        # ... initialise here
 
     def handleNotification(self, cHandle, data):
-        # ... perhaps check cHandle
-        # ... process 'data'
         print(f'notified data: {int(data.hex(),16)}')
-        # print("hello 123")
         return
 
 
-scanner = Scanner()
-print("Scanning for 5 seconds...")
-devices = list(scanner.scan(5.0))
-for i, dev in enumerate(devices):
-    print("#%d: %s (%s), RSSI=%d dB" % (i, dev.addr, dev.addrType, dev.rssi))
-    for (adtype, desc, value) in dev.getScanData():
-        if desc == "Complete Local Name":
-            print("  %s = %s" % (desc, value))
+# scanner = Scanner()
+# print("Scanning for 5 seconds...")
+# devices = list(scanner.scan(5.0))
+# for i, dev in enumerate(devices):
+#     print("#%d: %s (%s), RSSI=%d dB" % (i, dev.addr, dev.addrType, dev.rssi))
+#     for (adtype, desc, value) in dev.getScanData():
+#         if desc == "Complete Local Name":
+#             print("  %s = %s" % (desc, value))
 
-print()
-number = int(input('Enter your device number: '))
-print(f'Connecting to #{number}: {devices[number].addr}')
+# print()
+# number = int(input('Enter your device number: '))
+# print(f'Connecting to #{number}: {devices[number].addr}')
 
-dev = Peripheral(devices[number].addr, devices[number].addrType)
+# dev = Peripheral(devices[number].addr, devices[number].addrType)
+print(f"Connecting to #{MAC_ADDRESS}...")
+dev = Peripheral(MAC_ADDRESS, 'random')
 dev.setDelegate(MyDelegate())
 
 services = dev.getServices()
 
-print()
 print("Available Services:")
-for svc in services:
+for svc in services:    
     print("Service", str(svc.uuid), svc)
 
 try:
