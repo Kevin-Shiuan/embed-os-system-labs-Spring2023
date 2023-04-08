@@ -22,7 +22,7 @@ class MyDelegate(DefaultDelegate):
     def handleNotification(self, cHandle, data):
         # ... perhaps check cHandle
         # ... process 'data'
-        print(f'notified data: {data.hex()}')
+        print(f'notified data: {data}')
         # print("hello 123")
         return
 
