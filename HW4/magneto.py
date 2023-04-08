@@ -24,21 +24,6 @@ class MyDelegate(DefaultDelegate):
         print(f'notified data: {int(data.hex(),16)}')
         return
 
-
-# scanner = Scanner()
-# print("Scanning for 5 seconds...")
-# devices = list(scanner.scan(5.0))
-# for i, dev in enumerate(devices):
-#     print("#%d: %s (%s), RSSI=%d dB" % (i, dev.addr, dev.addrType, dev.rssi))
-#     for (adtype, desc, value) in dev.getScanData():
-#         if desc == "Complete Local Name":
-#             print("  %s = %s" % (desc, value))
-
-# print()
-# number = int(input('Enter your device number: '))
-# print(f'Connecting to #{number}: {devices[number].addr}')
-
-# dev = Peripheral(devices[number].addr, devices[number].addrType)
 print(f"Connecting to #{MAC_ADDRESS}...")
 dev = Peripheral(MAC_ADDRESS, 'random')
 dev.setDelegate(MyDelegate())
