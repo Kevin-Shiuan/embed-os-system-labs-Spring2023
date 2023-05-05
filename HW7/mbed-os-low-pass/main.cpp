@@ -219,7 +219,7 @@ int32_t main(void) {
   for (int i = 0; i < TEST_LENGTH_SAMPLES; i++) {
     BSP_ACCELERO_AccGetXYZ(acc_xyz);
     rawX[i] = (float32_t)acc_xyz[0]/10000.0f;
-    ThisThread::sleep_for(10);
+    ThisThread::sleep_for(100);
   }
   //   BSP_GYRO_Init();
   uint32_t i;
@@ -240,8 +240,8 @@ int32_t main(void) {
   //          gyro_xyz[2]); // print acceleration data to console
 
   /* Initialize input and output buffer pointers */
-    inputF32 = &testInput_f32_1kHz_15kHz[0];
-//   inputF32 = &rawX[0];
+    // inputF32 = &testInput_f32_1kHz_15kHz[0];
+  inputF32 = &rawX[0];
   outputF32 = &testOutput[0];
 
   /* Call FIR init function to initialize the instance structure. */
@@ -288,7 +288,7 @@ int32_t main(void) {
   }
   printf("\n output: \n");
   for (int n = 0; n < TEST_LENGTH_SAMPLES; n++) {
-    printf("%.2f, ", refOutput[n]);
+    printf("%.9f, ", outputF32[n]);
   }
 }
 
