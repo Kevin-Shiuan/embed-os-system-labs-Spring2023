@@ -1,0 +1,3 @@
+# ignore all file in folder Final/mbed-os-example-blinky
+/Final/mbed-os-example-blinky
+/Final/mbed-os-example-sockets
