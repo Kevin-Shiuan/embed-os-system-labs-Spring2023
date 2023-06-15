@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 import socket
-import numpy as np
 import json
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 
 HOST = '192.168.10.196'  # IP address
 PORT = 65431  # Port to listen on (use ports > 1023)
@@ -13,8 +10,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
     print('Server is listening...')
-    desired_temperature = input("Enter desired_temperature: ")
-    fan_mode = input("Enter fanMode value(0 for auto): ")
+    desired_temperature = 26.0
+    fan_mode = 0
     while True:
         conn, addr = s.accept()
         with conn:
@@ -24,3 +21,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024).decode('utf-8')
             json_data = json.loads(data)
             print('temperature : ', json_data["temperature"])
+            desired_temperature = input("Enter desired_temperature(current=): ")
+            fan_mode = input("Enter fanMode value(0 for auto): ")
